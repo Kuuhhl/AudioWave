@@ -1,47 +1,41 @@
 import requests
-import threading
 from concurrent.futures import ThreadPoolExecutor
 import datetime
 import time
-from requests.packages.urllib3.exceptions import (
-    InsecureRequestWarning,
-    NewConnectionError,
-    MaxRetryError,
-)
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from playsound import playsound
-
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
-def announce(minute, history):  # True = Cannon; False = Caster
+def announce(minute, history):
     beforelastwave = history.pop(0)
     lastwave = history[0]
     if minute < 20:
         if lastwave == True:
             print("Caster Wave!")
-            playsound("casterwave.mp3")
+            playsound("audio/casterwave.mp3")
             return False
         elif lastwave == False and beforelastwave == False:
             print("Cannon Wave!")
-            playsound("cannonwave.mp3")
+            playsound("audio/cannonwave.mp3")
             return True
         elif lastwave == False and beforelastwave == True:
             print("Caster Wave!")
-            playsound("casterwave.mp3")
+            playsound("audio/casterwave.mp3")
             return False
     elif minute > 20 and minute < 35:
         if lastwave == True:
             print("Caster Wave!")
-            playsound("casterwave.mp3")
+            playsound("audio/casterwave.mp3")
             return False
         elif lastwave == False:
             print("Cannon Wave!")
-            playsound("cannonwave.mp3")
+            playsound("audio/cannonwave.mp3")
             return True
     elif minute > 20:
         print("Cannon Wave!")
-        playsound("cannonwave.mp3")
+        playsound("audio/cannonwave.mp3")
         return True
 
 
@@ -54,6 +48,7 @@ def main():
                 "https://127.0.0.1:2999/liveclientdata/allgamedata", verify=False
             ).json()["gameData"]["gameTime"]
         )
+        print("Synced time with Ingame API.")
         for x in range(10):
             x += 1
             newtime = starttime + datetime.timedelta(seconds=x)
@@ -69,6 +64,6 @@ while True:
         main()
         break
     except (requests.exceptions.ConnectionError, KeyError):
-        print("Not connected yet...")
-        time.sleep(1)
+        print("Not connected. Trying again in 10 seconds...")
+        time.sleep(10)
         continue
