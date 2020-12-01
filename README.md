@@ -1,6 +1,6 @@
 # AudioWave for League of Legends
 This tool allows you to be notified audibly every time a minion wave spawns. It plays an announcement on every time minions spawn according to the type of minion wave spawning (e.g."Cannonwave").
-## Installation
+## Installation (not needed for `.exe` binaries)
 * Install `Python 3.8`
 * Install dependencies:
 ```
