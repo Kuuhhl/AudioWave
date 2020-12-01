@@ -9,6 +9,7 @@ pip install playsound
 ```
 ## Usage
 * Run `main.py` or the binary `.exe` before entering the game.
+* If you get asked, specify a limit (in minutes)to stop the program at. If you don't need one, just paste `999999`
 * Enjoy!
 
 ### Warning
@@ -28,4 +29,3 @@ To change the audio-file:
 ## TODO
 * Implement a feature to use this game after game without restarting.
 * Implement a feature to start this when game already started.
-* Option to mute after certain time
