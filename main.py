@@ -5,8 +5,15 @@ import time
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from playsound import playsound
 from os import path
+import psutil
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+
+def is_process_running(process_name):
+    for process in psutil.process_iter():
+        if process.name() == process_name:
+            return True
 
 
 def get_limit():
@@ -70,7 +77,6 @@ def announce(minute, history):
 
 
 def main(limit):
-    print("Waiting for game...")
     history = [False, True]
     executor = ThreadPoolExecutor(max_workers=2)
     try:
@@ -80,6 +86,7 @@ def main(limit):
         print("Connected successfully!")
     except:
         raise KeyError
+
     while True:
         starttime = datetime.timedelta(
             seconds=requests.get(
@@ -108,13 +115,14 @@ print(
   / /| |/ / / / __  / / __ \ | /| / / __ `/ | / / _ \\
  / ___ / /_/ / /_/ / / /_/ / |/ |/ / /_/ /| |/ /  __/
 /_/  |_\__,_/\__,_/_/\____/|__/|__/\__,_/ |___/\___/ 
-"""
-)
 
+Waiting for game to start..."""
+)
 while True:
     try:
-        main(get_limit())
-        break
+        if is_process_running("League of Legends.exe"):
+            main(get_limit())
+            break
+        time.sleep(10)
     except (requests.exceptions.ConnectionError, KeyError):
-        time.sleep(5)
         continue
