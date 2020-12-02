@@ -9,23 +9,27 @@ pip install playsound
 ```
 ## Usage
 * Run `main.py` or the binary `.exe` before entering the game.
-* If you get asked, specify a limit (in minutes)to stop the program at. If you don't need one, just paste `999999`
+* If it's your first time running the program, you will have the option to specify a time limit to close the program automatically on a given time.
 * Enjoy!
 
-### Warning
+### Disclaimer
 Please make sure to restart the app after every game until I implement a solution.
 
 ## How does it work?
 * The program reads the ingame time from the live ingame API by Riot.
 * A timer is started that is synced regularly to prevent too much time dilation.
 * Every time a wave should spawn, the program predicts the next wave by analyzing the last two waves.
-* The predicted wave is read aloud by an audio-file.
+* The predicted wave is announced.
 
 ## I don't like the audio. Can I change it?
 To change the audio-file:
 * navigate to the `/audio` in the script's folder 
 * replace the `.mp3` files with your own. Make sure not to change the file names though.
+## How do I change the time limit?
+To change the time limit:
+* Navigate to the script's folder
+* Delete `config` file.
 
 ## TODO
-* Implement a feature to use this game after game without restarting.
+* Implement a feature to use this without restarting after games.
 * Implement a feature to start this when game already started.
