@@ -54,7 +54,7 @@ def announce(minute, history):
             print("Detected Caster Wave.")
             playsound("audio/casterwave.mp3")
             return False
-    elif minute > 15 and minute < 25:
+    elif minute >= 15 and minute < 25:
         if lastwave == True:
             print("Detected Caster Wave.")
             playsound("audio/casterwave.mp3")
@@ -63,7 +63,7 @@ def announce(minute, history):
             print("Detected Cannon Wave.")
             playsound("audio/cannonwave.mp3")
             return True
-    elif minute > 25:
+    elif minute >= 25:
         print("Detected Cannon Wave.")
         playsound("audio/cannonwave.mp3")
         return True
